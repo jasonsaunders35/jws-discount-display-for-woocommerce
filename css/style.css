@@ -1,0 +1,83 @@
+.product-image
+{
+    position:relative;
+}
+
+span.bubble {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-weight:500;
+    font-family: Arial, Verdana, sans-serif;
+    padding: 4px;
+    border-radius:20px;
+    z-index:1;
+    border-width:1px;
+}
+span.bubble.box {
+    top:0;
+    right:0;
+    border-radius: 0;
+}
+span.bubble span.off {
+    display: block;
+    line-height: 1;
+    text-align:center;
+    text-transform: uppercase;
+    font-size:12px;
+}
+span.bubble span.discount {
+    line-height: 1;
+    display: block;
+    text-align:center;
+}
+.zoomContainer{
+    z-index:3;
+}
+
+/*corner style*/
+
+.product-image{
+    overflow: hidden;
+}
+.product-image span.corner.bubble {
+    top: -13px;
+    right: -30px;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    padding: 20px 27px 1px 26px;
+    border-radius: 0;
+}
+.ie8 .product-image span.corner.bubble {
+    top: 0;
+    right: 0;
+}
+
+/* prepended to product name */
+
+.product-name span.bubble {
+    float:left;
+    position: static;
+    font-size: auto;
+    border-radius: 0;
+    border-right: 1px solid;
+    margin-right: 6px;
+}
+
+.product-view .product-shop .product-name .h1 {
+    float: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 33px;
+}
+
+.bubble + a {
+    display: block;
+    padding: 0;
+    text-align: left;
+    position:relative;
+    top: -2px;
+}
