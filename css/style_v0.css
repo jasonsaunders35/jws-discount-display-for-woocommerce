@@ -7,9 +7,9 @@ span.bubble {
     position: absolute;
     top: 2px;
     right: 2px;
-    font-weight:bold;
+    font-weight:500;
     font-family: Arial, Verdana, sans-serif;
-    padding: 2px 1px;
+    padding: 4px;
     border-radius:20px;
     z-index:1;
     border-width:1px;
@@ -30,7 +30,6 @@ span.bubble span.discount {
     line-height: 1;
     display: block;
     text-align:center;
-    font-size: 14px;
 }
 .zoomContainer{
     z-index:3;
@@ -38,11 +37,10 @@ span.bubble span.discount {
 
 /*corner style*/
 
-div.product, li{
+.product-image{
     overflow: hidden;
 }
-div.product span.corner.bubble, 
-li span.corner.bubble {
+.product-image span.corner.bubble {
     top: -13px;
     right: -30px;
     -ms-transform: rotate(45deg);
@@ -50,7 +48,7 @@ li span.corner.bubble {
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
-    padding: 20px 27px 1px 27px;
+    padding: 20px 27px 1px 26px;
     border-radius: 0;
 }
 .ie8 .product-image span.corner.bubble {
@@ -60,29 +58,26 @@ li span.corner.bubble {
 
 /* prepended to product name */
 
-span.bubble.beforeproductname {
-    float: none;
+.product-name span.bubble {
+    float:left;
     position: static;
     font-size: auto;
     border-radius: 0;
     border-right: 1px solid;
-    display: inline-block;
-    vertical-align: top;
+    margin-right: 6px;
 }
 
-.beforeproductname span.discount, .beforeproductname span.off {
-    font-size: 12px;
-    line-height: 1em !important;
+.product-view .product-shop .product-name .h1 {
+    float: left;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    line-height: 33px;
 }
 
-span.bubble.beforeproductname.nominal + * {
-    display: inline-block;
-    max-width: calc(100% - 41px);
+.bubble + a {
+    display: block;
+    padding: 0;
     text-align: left;
-    padding-left: 6px;
-}
-
-ul.products li.product .star-rating{
     position:relative;
-    margin: 0 auto;
+    top: -2px;
 }

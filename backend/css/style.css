@@ -1,0 +1,189 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 13, 2017, 10:27:14 AM
+    Author     : jason
+*/
+
+/* li */
+@media (min-width: 768px){
+    .site-main .columns-3 ul.products li.product {
+        width: 29.4117647059%;
+        float: left;
+        margin-right: 5.8823529412%;
+    }
+}
+@media (min-width: 768px){
+    .site-main ul.products li.product {
+        width: 29.4117647059%;
+        float: left;
+        margin-right: 5.8823529412%;
+    }
+}
+@media (min-width: 768px){
+    ul.products li.product.first {
+        clear: both!important;
+    }
+}
+
+ul.products li.product {
+    clear: none;
+    width: 100%;
+    float: left;
+    font-size: .875em;
+}
+
+ul.products li.product {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 4.235801032em;
+    text-align: center;
+    position: relative;
+}
+
+div.product, li {
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/* li > a */
+ul.products li.product .woocommerce-LoopProduct-link {
+    display: block;
+}
+
+a {
+    color: #96588a;
+}
+
+a {
+    color: #2c2d33;
+    text-decoration: none;
+    font-weight: 400;
+}
+
+a {
+    background-color: transparent;
+}
+
+@media (min-width: 768px){
+    ul.products li.product {
+        clear: none;
+        width: 100%;
+        float: left;
+        font-size: .875em;
+    }
+}
+
+ul.products li.product {
+    list-style: none;
+    margin-left: 0;
+    margin-bottom: 4.235801032em;
+    text-align: center;
+    position: relative;
+}
+
+/* img */
+
+ul.products li.product img {
+    display: block;
+    margin: 0 auto 1.618em;
+}
+
+img {
+    border-radius: 3px;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    display: block;
+}
+
+img {
+    border: 0;
+}
+
+/* h2 */
+ul.products li.product .woocommerce-loop-product__title, ul.products li.product h2, ul.products li.product h3 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: .5407911001em;
+}
+
+h2 {
+    color: #333333;
+}
+
+h2 {
+    font-size: 2em;
+    line-height: 1.214;
+}
+
+h2{
+    clear: both;
+    font-weight: 300;
+    margin: 0 0 .5407911001em;
+    color: #131315;
+}
+
+.onsale {
+    border-color: #6d6d6d;
+}
+
+.onsale{
+    color: #6d6d6d;
+}
+
+.onsale {
+    border: 1px solid;
+    border-color: #43454b;
+    color: #43454b;
+    padding: .202em .6180469716em;
+    font-size: .875em;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1em;
+    border-radius: 3px;
+}
+.onsale{
+    color: #6d6d6d;
+}
+
+/* price */
+ul.products li.product .price {
+    color: #6d6d6d;
+}
+
+ul.products li.product .price {
+    display: block;
+    color: #43454b;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+ul.products li.product .price {
+    color: #6d6d6d;
+}
+
+ul.products li.product .price {
+    display: block;
+    color: #43454b;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.price del {
+    opacity: .5;
+    font-weight: 400;
+}
+
+.price ins {
+    font-weight: 400;
+}

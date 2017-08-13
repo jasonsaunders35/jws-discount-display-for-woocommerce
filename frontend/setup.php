@@ -14,9 +14,13 @@ function discountlabel_frontend_all_scriptsandstyles() {
 
 }
 
+$configArray = get_option('options');
+var_dump($configArray);
 
 add_action( 'wp_footer', 'add_footer_script' );
-function add_footer_script() {?>
+function add_footer_script() {
+$configArray = get_option('options');
+?>
 <script>
 /* Manually Change Style or Mode by updating the following values */
 var JWS_DiscountStyle = ''; // beforeproductname,bubble,corner,box
@@ -33,8 +37,7 @@ jasonvisualdiscount = {
         return Math.abs(Number((jthis.find(selector).text()).replace(/[^0-9\.]+/g,'')));
     }, 
     mode: function(){
-        var mode =  '<?php //echo $configArray['discountmode']?>';
-        var mode =  'nominal';
+        var mode =  '<?php echo $configArray['discountmode']; ?>';
         //if (groupspecificjasonvisualdiscount.mode != ""){
             //mode = groupspecificjasonvisualdiscount.mode;
         //}
@@ -59,8 +62,7 @@ jasonvisualdiscount = {
         return mode;
      },
     style: function(){
-        var style =  '<?php // echo $configArray['style']?>';
-        var style =  "bubble"; // default
+        var style =  '<?php echo $configArray['display_style']?>';
         //if (groupspecificjasonvisualdiscount.style != ""){
             //style = groupspecificjasonvisualdiscount.style;
         //}
@@ -109,8 +111,8 @@ jasonvisualdiscount = {
                 case 'box':
                     ele.addClass('box');
                     break;
-                case 'infrontOfProductName':
-                    ele.addClass('product-name');
+                case 'beforeproductname':
+                    ele.addClass('beforeproductname');
                     ele.find('span.discount').text(jasonvisualdiscount.percentDiscount(jthis)+"%");  
                     break;
                 default:
@@ -133,41 +135,39 @@ jasonvisualdiscount = {
             }
             
             <?php
-            /*
+            
             foreach ($configArray as $key => $value) {
-                if ((strpos($key, 'css') === FALSE) || ($value =="")){ // key does not contain 'css' or value is empty
-                    // do nothing 
-                }
-                else{
+                if ((strpos($key, 'css') !== FALSE) || ($value =="")){ // key does not contain 'css' or value is empty
                     $key  = str_replace("css", "", $key); // remove 'css' from key before applying it as css attribute
                     echo "ele.css('".$key."',"."'$value'".");";
                 }
             }
-             * 
-             */
             
             ?>
         //var eleWithGroupChanges = groupspecificjasonvisualdiscount.addStyle(ele);
         return ele;
     }, collectSpecialItems: function(){
-        var saleProductSelector = 'ul.products li.product';
+        var saleProductSelector = 'ul.products li.product, .summary';
         jQuery(saleProductSelector).each(function(){
 
             var jthis = jQuery(this);
 
             // wc has no unique class for discounted products, so have to look for 2 prices for each item
             if (jthis.find('span.amount').length == 2){
-
-                if (jasonvisualdiscount.style()=='beforeproductname'){
-                    var selector = ".woocommerce-loop-product__title";
-                    var prependToEle = jthis.find(selector);
-                } else {
-                    var selector = ".woocommerce-LoopProduct-link:eq(0)";
-                    var prependToEle = jthis.find(selector);             
-                }
-
                 if(jasonvisualdiscount.specialPrice(jthis)){
-                    prependToEle.prepend(jasonvisualdiscount.discountBubble(jthis));
+                    if (jasonvisualdiscount.style()=='beforeproductname'){
+                        var selector = "h2.woocommerce-loop-product__title";
+                        var ele = jthis.find(selector);
+                        ele.before(jasonvisualdiscount.discountBubble(jthis));
+                    } else {
+                        if (jthis.hasClass('summary')){ // pdp 
+                            ele = jQuery(".woocommerce-product-gallery");
+                        } else { // any other type
+                            var selector = ".woocommerce-LoopProduct-link:eq(0)";
+                            var ele = jthis.find(selector);          
+                        }
+                        ele.before(jasonvisualdiscount.discountBubble(jthis));
+                    }
                 }
             }
         });

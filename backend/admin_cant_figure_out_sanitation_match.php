@@ -3,15 +3,12 @@
 add_action('admin_head', 'discountlabel_backend_all_scriptsandstyles');
 //https://css-tricks.com/snippets/wordpress/apply-custom-css-to-admin-area/
 function discountlabel_backend_all_scriptsandstyles(){
-    // truncated style for preview in backend
-    wp_register_style( 'jsw_discountlabel_backend_preview', plugins_url( 'css/style.css', __FILE__ ), array(), '', 'all' );
-    // shared between frontend and backend
-    wp_register_style( 'jsw_discountlabel_shared', plugins_url( '../css/style.css', __FILE__ ), array(), '', 'all' );
-
+//Load JS and CSS files in here
+  //wp_register_script ('placeholder', get_stylesheet_directory_uri() . '/js/placeholder.js', array( 'jquery' ),'1',true);
+    wp_register_style( 'discountlabel', plugins_url( '../css/style.css', __FILE__ ), array(), '', 'all' );
 
   //wp_enqueue_script('placeholder');
-  wp_enqueue_style( 'jsw_discountlabel_backend_preview');
-  wp_enqueue_style( 'jsw_discountlabel_shared');
+  wp_enqueue_style( 'discountlabel');
 }
 
 add_action('admin_menu', 'register_my_custom_submenu_page');
@@ -20,11 +17,10 @@ function register_my_custom_submenu_page() {
     add_submenu_page( 'woocommerce', 'My Custom Submenu Page', 'My Custom Submenu Page', 'manage_options', 'my-custom-submenu-page', 'my_custom_submenu_page_callback' ); 
 }
 
-function returnTest(){
-    return 'test';
-}
+$test = 'not fucked';
 
-function getConfigurationOptions(){
+//build the plugin settings page
+function my_custom_submenu_page_callback() {
     
     /***************    Assign Option Sets            ************************************************/
     $yesNoOptionList = array(
@@ -320,16 +316,6 @@ function getConfigurationOptions(){
                 "options"=> $borderStyleOptionList
                 )
     );
-    
-    return $jsw_select_array;
-}
-
-//build the plugin settings page
-function my_custom_submenu_page_callback() {
-    
-    $jsw_select_array =  getConfigurationOptions();
-    
-    
 
     /***************    Assign Defaults    ************************************************/
     $options = get_option( 'options' );
@@ -354,15 +340,6 @@ function my_custom_submenu_page_callback() {
     }
     usort($jsw_select_array, "cmp");
     ?>
-    <ul class = "products">
-        <li class="product type-product has-post-thumbnail product_cat-posters instock sale  purchasable ">
-                <span class="bubble corner nominal" style="color: seashell; background-color: forestgreen; border-width: 5px; border-color: darkgoldenrod; border-style: dotted;"><span class="discount">20%</span><span class="off">Off</span></span>
-                <a href="http://wp.net/index.php/product/flying-ninja/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><img width="300" height="300" src="//wp.net/wp-content/uploads/2013/06/poster_2_up-300x300.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="//wp.net/wp-content/uploads/2013/06/poster_2_up-300x300.jpg 300w, //wp.net/wp-content/uploads/2013/06/poster_2_up-150x150.jpg 150w, //wp.net/wp-content/uploads/2013/06/poster_2_up-768x768.jpg 768w, //wp.net/wp-content/uploads/2013/06/poster_2_up-180x180.jpg 180w, //wp.net/wp-content/uploads/2013/06/poster_2_up-600x600.jpg 600w, //wp.net/wp-content/uploads/2013/06/poster_2_up.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px"><h2 class="woocommerce-loop-product__title">Flying Ninja</h2><div class="star-rating"><span style="width:80%">Rated <strong class="rating">4.00</strong> out of 5</span></div>
-                <span class="onsale">Sale!</span>
-
-                <span class="price"><del><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>15.00</span></del> <ins><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>12.00</span></ins></span>
-        </li>
-    </ul>
     <div class="wrap">
     <h2><?php _e( 'Store Options', 'plugin' ) ?></h2>
 
@@ -390,6 +367,20 @@ function my_custom_submenu_page_callback() {
     </form>
     </div>
 <?php
+    /*
+    foreach($options as $option): 
+        if (!in_array($option, $allOptionValuesList))
+              {
+                  echo "$option is a bad value";
+              }
+        else {
+                 echo "$option is a good value";      
+        }
+        echo '<br/>';
+    endforeach;
+     * 
+     */
+    $test = 'fuck';
 }
 
 
@@ -404,31 +395,15 @@ function store_register_settings() {
 
 }
 
-function sanitize_options($options) {
+function sanitize_options( $options, $allOptionValuesList) {
     
-    $jsw_select_array =  getConfigurationOptions();
-    
-    // create the full list of all valid option values
-    $allOptionValuesList = array("");
-    foreach($jsw_select_array as $jsw_select):        
-        foreach($jsw_select['options'] as $value): 
-            $allOptionValuesList[] = $value[0];
-        endforeach;
-    endforeach;
-
-    // compare each submited option value against the full list of valid value
     foreach($options as $option): 
         if (!in_array($option, $allOptionValuesList))
-            // a submitted value does not match any valid value
               {
-                    // add_settings_error( $setting, $code, $message, $type )
-                    $message = __('Oh noes! There was a problem.');
-                    $type = 'error';
-                    add_settings_error('my_option_notice', 'my_option_notice', $message, $type);
-                    return;
+                  return;
               }
     endforeach;
-    
+
     return $options;
 
 }
