@@ -9,25 +9,6 @@ and open the template in the editor.
 */
 
 /* li */
-@media (min-width: 768px){
-    .site-main .columns-3 ul.products li.product {
-        width: 29.4117647059%;
-        float: left;
-        margin-right: 5.8823529412%;
-    }
-}
-@media (min-width: 768px){
-    .site-main ul.products li.product {
-        width: 29.4117647059%;
-        float: left;
-        margin-right: 5.8823529412%;
-    }
-}
-@media (min-width: 768px){
-    ul.products li.product.first {
-        clear: both!important;
-    }
-}
 
 ul.products li.product {
     clear: none;
@@ -186,4 +167,46 @@ ul.products li.product .price {
 
 .price ins {
     font-weight: 400;
+}
+ul.products li.product .price ins {
+    margin-left: .6180469716em;
+    background-color: transparent;
+}
+
+.price del+ins {
+    margin-left: .327em;
+}
+
+ins, mark {
+    text-decoration: none;
+    font-weight: 600;
+    background: 0 0;
+}
+
+/**************************** custom **************/
+
+ul.products li.product{
+    width: 230px;
+}
+
+ul.products li.product .star-rating{
+    display:none;
+}
+
+ul.products span.amount{
+    font-size: 14px;
+}
+
+.discount-label-preview {
+    float: right;
+    min-width: 50%;
+}
+
+.discount-label-form {
+    float: left;
+    min-width: 50%;
+}
+
+.discount-label-form td select {
+    width: 230px;
 }

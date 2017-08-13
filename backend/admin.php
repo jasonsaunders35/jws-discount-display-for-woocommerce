@@ -8,10 +8,13 @@ function discountlabel_backend_all_scriptsandstyles(){
     // shared between frontend and backend
     wp_register_style( 'jsw_discountlabel_shared', plugins_url( '../css/style.css', __FILE__ ), array(), '', 'all' );
 
-
-  //wp_enqueue_script('placeholder');
   wp_enqueue_style( 'jsw_discountlabel_backend_preview');
   wp_enqueue_style( 'jsw_discountlabel_shared');
+  
+  /****** script(s) *********/
+    wp_register_script('jsw_discountlabel_backend_script', plugins_url('js/admin.js', __FILE__), array('jquery'),'1.1', true);
+    wp_enqueue_script('jsw_discountlabel_backend_script');
+
 }
 
 add_action('admin_menu', 'register_my_custom_submenu_page');
@@ -354,40 +357,45 @@ function my_custom_submenu_page_callback() {
     }
     usort($jsw_select_array, "cmp");
     ?>
-    <ul class = "products">
-        <li class="product type-product has-post-thumbnail product_cat-posters instock sale  purchasable ">
-                <span class="bubble corner nominal" style="color: seashell; background-color: forestgreen; border-width: 5px; border-color: darkgoldenrod; border-style: dotted;"><span class="discount">20%</span><span class="off">Off</span></span>
-                <a href="http://wp.net/index.php/product/flying-ninja/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><img width="300" height="300" src="//wp.net/wp-content/uploads/2013/06/poster_2_up-300x300.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="//wp.net/wp-content/uploads/2013/06/poster_2_up-300x300.jpg 300w, //wp.net/wp-content/uploads/2013/06/poster_2_up-150x150.jpg 150w, //wp.net/wp-content/uploads/2013/06/poster_2_up-768x768.jpg 768w, //wp.net/wp-content/uploads/2013/06/poster_2_up-180x180.jpg 180w, //wp.net/wp-content/uploads/2013/06/poster_2_up-600x600.jpg 600w, //wp.net/wp-content/uploads/2013/06/poster_2_up.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px"><h2 class="woocommerce-loop-product__title">Flying Ninja</h2><div class="star-rating"><span style="width:80%">Rated <strong class="rating">4.00</strong> out of 5</span></div>
-                <span class="onsale">Sale!</span>
 
-                <span class="price"><del><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>15.00</span></del> <ins><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>12.00</span></ins></span>
-        </li>
-    </ul>
-    <div class="wrap">
-    <h2><?php _e( 'Store Options', 'plugin' ) ?></h2>
+    <div class="wrap entry-edit">
+        <div class ="discount-label-form">
+            <h2><?php _e( 'Store Options', 'plugin' ) ?></h2>
 
-    <form method="post" action="options.php">
-        <?php settings_fields( 'settings-group' ); ?>
-        <table class="form-table">
-            <?php for ($x = 0; $x < count($jsw_select_array); $x++): ?>
-                <tr valign="top">
-                    <th scope="row"><?php _e( $jsw_select_array[$x]['name'], 'plugin' ) ?></th>
-                    <td>
-                        <select id="<?php echo ($jsw_select_array[$x]['id']);?>" name="options[<?php echo $jsw_select_array[$x]['slug'] ?>]" class=" select">
-                            <?php foreach($jsw_select_array[$x]['options'] as $option): ?>
-                                <option <?php selected( $options[$jsw_select_array[$x]['slug']], $option[0] ); ?> value="<?php echo $option[0];?>"><?php echo $option[1];?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </td>
-                </tr>
-            <?php endfor; ?>
-        </table>
+            <form method="post" action="options.php">
+                <?php settings_fields( 'settings-group' ); ?>
+                <table class="form-table">
+                    <?php for ($x = 0; $x < count($jsw_select_array); $x++): ?>
+                        <tr valign="top">
+                            <th scope="row"><?php _e( $jsw_select_array[$x]['name'], 'plugin' ) ?></th>
+                            <td>
+                                <select id="<?php echo ($jsw_select_array[$x]['id']);?>" name="options[<?php echo $jsw_select_array[$x]['slug'] ?>]" class=" select">
+                                    <?php foreach($jsw_select_array[$x]['options'] as $option): ?>
+                                        <option <?php selected( $options[$jsw_select_array[$x]['slug']], $option[0] ); ?> value="<?php echo $option[0];?>"><?php echo $option[1];?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </td>
+                        </tr>
+                    <?php endfor; ?>
+                </table>
 
-        <p class="submit">
-        <input type="submit" class="button-primary" value="<?php _e( 'Save Changes', 'plugin' ); ?>" />
-        </p>
+                <p class="submit">
+                <input type="submit" class="button-primary" value="<?php _e( 'Save Changes', 'plugin' ); ?>" />
+                </p>
 
-    </form>
+            </form>
+        </div>
+        <div class = "discount-label-preview">
+            <ul class = "products">
+                <li class="product type-product has-post-thumbnail product_cat-posters instock sale  purchasable ">
+                        <span class="bubble corner nominal" style="color: seashell; background-color: forestgreen; border-width: 5px; border-color: darkgoldenrod; border-style: dotted;"><span class="discount">20%</span><span class="off">Off</span></span>
+                        <a href="http://wp.net/index.php/product/flying-ninja/" class="woocommerce-LoopProduct-link woocommerce-loop-product__link"><img width="300" height="300" src="//wp.net/wp-content/uploads/2013/06/poster_2_up-300x300.jpg" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="" srcset="//wp.net/wp-content/uploads/2013/06/poster_2_up-300x300.jpg 300w, //wp.net/wp-content/uploads/2013/06/poster_2_up-150x150.jpg 150w, //wp.net/wp-content/uploads/2013/06/poster_2_up-768x768.jpg 768w, //wp.net/wp-content/uploads/2013/06/poster_2_up-180x180.jpg 180w, //wp.net/wp-content/uploads/2013/06/poster_2_up-600x600.jpg 600w, //wp.net/wp-content/uploads/2013/06/poster_2_up.jpg 1000w" sizes="(max-width: 300px) 100vw, 300px"><h2 class="woocommerce-loop-product__title">Flying Ninja</h2><div class="star-rating"><span style="width:80%">Rated <strong class="rating">4.00</strong> out of 5</span></div>
+                        <span class="onsale">Sale!</span>
+
+                        <span class="price"><del><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>15.00</span></del> <ins><span class="woocommerce-Price-amount amount"><span class="woocommerce-Price-currencySymbol">$</span>12.00</span></ins></span>
+                </li>
+            </ul>
+        </div>
     </div>
 <?php
 }
