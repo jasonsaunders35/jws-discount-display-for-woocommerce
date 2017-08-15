@@ -134,7 +134,19 @@ jasonvisualdiscount = {
             ?>
         //var eleWithGroupChanges = groupspecificjasonvisualdiscount.addStyle(ele);
         return ele;
-    }, collectSpecialItems: function(){
+    }, adjustCornerPosition(){
+        // handle position of corner style at different border widths
+        var discountBubbleElement = jQuery('.product .bubble.corner');
+        var originalTop = discountBubbleElement.css('top').replace('px','');
+        var originalRight = discountBubbleElement.css('right').replace('px','');
+        var borderWidthVal = discountBubbleElement.first().css('border-bottom-width').replace('px','');
+        jQuery(discountBubbleElement).each(function(){
+            jQuery(this).css({
+                'top':originalTop-borderWidthVal+'px',
+                'right':originalRight-borderWidthVal+'px'
+            });
+        });         
+    } ,collectSpecialItems: function(){
         var saleProductSelector = 'ul.products li.product, .summary';
         jQuery(saleProductSelector).each(function(){
 
@@ -144,20 +156,23 @@ jasonvisualdiscount = {
             if (jthis.find('span.amount').length == 2){
                 if(jasonvisualdiscount.specialPrice(jthis)){
                     if (jthis.hasClass('summary')){ // pdp 
-                        ele = jQuery(".woocommerce-product-gallery");
+                       if ('<?php echo $configArray['useInProductDetail']?>' == '1'){ // if pdp section enabled
+                            ele = jQuery(".woocommerce-product-gallery");
+                       }
                     } else { // any other type
                         var selector = ".woocommerce-LoopProduct-link:eq(0)";
                         var ele = jthis.find(selector);          
                     }
-                    ele.before(jasonvisualdiscount.discountBubble(jthis));
+                    if(typeof ele !== "undefined"){
+                        ele.before(jasonvisualdiscount.discountBubble(jthis));
+                    }
                 }
             }
         });
+        jasonvisualdiscount.adjustCornerPosition();
     }
 }
-//if (groupspecificjasonvisualdiscount.groupEnabled === 1){
-    jasonvisualdiscount.collectSpecialItems();
-//}
+jasonvisualdiscount.collectSpecialItems();
 </script>
 <?php
 }

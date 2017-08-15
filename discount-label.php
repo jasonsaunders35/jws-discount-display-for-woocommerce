@@ -20,3 +20,5 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
     require dirname( __FILE__ ) . '/backend/admin.php';
 }
 
+/* todo add star rating to preview*/
+

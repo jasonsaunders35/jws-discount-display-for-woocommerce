@@ -5,10 +5,10 @@
 
 span.bubble {
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 3px;
+    right: 3px;
     font-family: Arial, Verdana, sans-serif;
-    padding: 4px;
+    padding: 6px;
     border-radius:25px;
     z-index:1;
     border-width:1px;
@@ -20,17 +20,21 @@ span.bubble.box {
     right:0;
     border-radius: 0;
 }
-span.bubble span.off {
-    display: block;
+span.bubble span{
     line-height: 1;
+    display: block;
     text-align:center;
+    vertical-align: bottom;
+    position: relative;
+    top: 1px;
+}
+span.bubble.corner span{
+    top: 0;
+}
+span.bubble span.off {
     text-transform: uppercase;
 }
-span.bubble span.discount {
-    line-height: 1;
-    display: block;
-    text-align:center;
-}
+
 .zoomContainer{
     z-index:3;
 }
@@ -44,21 +48,19 @@ span.bubble.boxshadow{
 div.product, li{
     overflow: hidden;
 }
-div.product span.corner.bubble, 
-li span.corner.bubble {
-    top: -13px;
-    right: -30px;
+div.product span.corner.bubble, li span.corner.bubble {
+    top: -11px;
+    right: -41px;
     -ms-transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
-    padding: 20px 27px 1px 27px;
+    padding: 21px 40px 1px 40px;
     border-radius: 0;
 }
-.ie8 .product-image span.corner.bubble {
-    top: 0;
-    right: 0;
+.ie8 .product-image .bubble {
+    display:none !important;
 }
 
 /* prepended to product name */

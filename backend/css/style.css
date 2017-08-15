@@ -215,9 +215,11 @@ ul.products span.amount{
 p.submit{
     margin:0;
 }
-p.submit span.instruction{
+#tr-previewProduct th, #tr-previewProduct td {
+    padding-bottom: 0;
+}
+div.instruction{
     display:block;
-    color: red;
     margin-bottom: 15px;
 }
 
@@ -250,4 +252,16 @@ p.submit span.instruction{
 
 .wp-color-result:after {
     line-height: 21px;
+}
+
+/*** user design ***/
+
+.entry-edit tr, 
+.entry-edit h2.advanced,
+.entry-edit div.instruction
+{
+    display:none;
+}
+#tr-enabled{
+    display:table-row;
 }
