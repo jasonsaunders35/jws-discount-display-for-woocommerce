@@ -29,16 +29,18 @@ var JWS_VisualDiscountMode = ''; // percent,nominal
 
 jasonvisualdiscount = {
     normalPrice: function(jthis){
-        var selector = 'del span.amount'; 
+        var selector = 'span.woocommerce-Price-amount:eq(0)';
         return Math.abs(Number((jthis.find(selector).text()).replace(/[^0-9\.]+/g,'')));
-        
     },
     specialPrice: function(jthis){
-        var selector = 'ins span.amount'; 
+        var selector = 'span.woocommerce-Price-amount:eq(1)'; 
         return Math.abs(Number((jthis.find(selector).text()).replace(/[^0-9\.]+/g,'')));
     }, 
     mode: function(){
         var mode =  '<?php echo $configArray['discountmode']; ?>';
+        //if (groupspecificjasonvisualdiscount.mode != ""){
+            //mode = groupspecificjasonvisualdiscount.mode;
+        //}
 
        // if defined manually above
         if (typeof(JWS_VisualDiscountMode) != "undefined"){
@@ -61,10 +63,13 @@ jasonvisualdiscount = {
      },
     style: function(){
         var style =  '<?php echo $configArray['display_style']?>';
+        //if (groupspecificjasonvisualdiscount.style != ""){
+            //style = groupspecificjasonvisualdiscount.style;
+        //}
         
         // if defined manually above
         if (typeof(JWS_DiscountStyle) != "undefined"){
-            if (JWS_DiscountStyle==="bubble" || JWS_DiscountStyle==="corner" || JWS_DiscountStyle==="box"){
+            if (JWS_DiscountStyle==="beforeproductname" || JWS_DiscountStyle==="bubble" || JWS_DiscountStyle==="corner" || JWS_DiscountStyle==="box"){
                 var style =  jasonVisualDiscountStyle;
             }
         }
@@ -77,6 +82,9 @@ jasonvisualdiscount = {
             }
             if (urlparams.search("DiscountLabelStyle=corner")!=-1){
                 var style =  "corner";
+            }
+            if (urlparams.search("DiscountLabelStyle=beforeproductname")!=-1){
+                var style =  "beforeproductname";
             }
             if (urlparams.search("DiscountLabelStyle=box")!=-1){
                 var style =  "box";
@@ -102,6 +110,10 @@ jasonvisualdiscount = {
                     break;
                 case 'box':
                     ele.addClass('box');
+                    break;
+                case 'beforeproductname':
+                    ele.addClass('beforeproductname');
+                    ele.find('span.discount').text(jasonvisualdiscount.percentDiscount(jthis)+"%");  
                     break;
                 default:
                     //code block
@@ -143,13 +155,19 @@ jasonvisualdiscount = {
             // wc has no unique class for discounted products, so have to look for 2 prices for each item
             if (jthis.find('span.amount').length == 2){
                 if(jasonvisualdiscount.specialPrice(jthis)){
-                    if (jthis.hasClass('summary')){ // pdp 
-                        ele = jQuery(".woocommerce-product-gallery");
-                    } else { // any other type
-                        var selector = ".woocommerce-LoopProduct-link:eq(0)";
-                        var ele = jthis.find(selector);          
+                    if (jasonvisualdiscount.style()=='beforeproductname'){
+                        var selector = "h2.woocommerce-loop-product__title";
+                        var ele = jthis.find(selector);
+                        ele.before(jasonvisualdiscount.discountBubble(jthis));
+                    } else {
+                        if (jthis.hasClass('summary')){ // pdp 
+                            ele = jQuery(".woocommerce-product-gallery");
+                        } else { // any other type
+                            var selector = ".woocommerce-LoopProduct-link:eq(0)";
+                            var ele = jthis.find(selector);          
+                        }
+                        ele.before(jasonvisualdiscount.discountBubble(jthis));
                     }
-                    ele.before(jasonvisualdiscount.discountBubble(jthis));
                 }
             }
         });
@@ -161,3 +179,4 @@ jasonvisualdiscount = {
 </script>
 <?php
 }
+?>

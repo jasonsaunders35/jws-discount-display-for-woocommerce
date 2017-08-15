@@ -8,11 +8,12 @@ span.bubble {
     top: 2px;
     right: 2px;
     font-family: Arial, Verdana, sans-serif;
-    padding: 2px 1px;
-    border-radius:20px;
+    padding: 4px;
+    border-radius:25px;
     z-index:1;
     border-width:1px;
-    font-size: 12px;
+    font-size: 16px;
+    font-weight: bold;
 }
 span.bubble.box {
     top:0;
@@ -32,6 +33,10 @@ span.bubble span.discount {
 }
 .zoomContainer{
     z-index:3;
+}
+
+span.bubble.boxshadow{
+    box-shadow: gray -1px 1px 2px;
 }
 
 /*corner style*/

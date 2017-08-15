@@ -9,10 +9,14 @@
 */
 //define('WP_DEBUG', true);
 
-define( 'JWS__PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 
-// Frontend 
-require dirname( __FILE__ ) . '/frontend/setup.php';
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+    define( 'JWS__PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 
-// Backend
-require dirname( __FILE__ ) . '/backend/admin.php';
+    // Frontend 
+    require dirname( __FILE__ ) . '/frontend/setup.php';
+
+    // Backend
+    require dirname( __FILE__ ) . '/backend/admin.php';
+}
+

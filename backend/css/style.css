@@ -197,16 +197,57 @@ ul.products span.amount{
     font-size: 14px;
 }
 
-.discount-label-preview {
-    float: right;
-    min-width: 50%;
+.discount-label-form
+{
+    float: left;
+    width: 450px;
 }
 
-.discount-label-form {
-    float: left;
-    min-width: 50%;
+.discount-label-preview
+{
+   float: left;
+    width: 400px;   
 }
 
 .discount-label-form td select {
     width: 230px;
+}
+p.submit{
+    margin:0;
+}
+p.submit span.instruction{
+    display:block;
+    color: red;
+    margin-bottom: 15px;
+}
+
+.entry-edit table:nth-of-type(1) tr:nth-of-type(2) {
+    border-top: 2px solid black !important;
+}
+.entry-edit table:nth-of-type(1) tr:nth-of-type(4) {
+    border-top: 1px solid black !important;
+}
+.entry-edit table:nth-of-type(1) tr:nth-of-type(7) {
+    border-top: 1px solid black !important;
+}
+
+.entry-edit h2{
+    text-align: center;
+}
+
+
+.discount-label-preview h2, 
+.discount-label-preview ul
+{
+    width: 230px;
+    margin: 0 auto;
+}
+.discount-label-preview h2
+{
+    text-align: center;
+    margin: 0 auto 30px auto;
+}
+
+.wp-color-result:after {
+    line-height: 21px;
 }
