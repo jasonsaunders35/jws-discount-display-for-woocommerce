@@ -20,5 +20,20 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
     require dirname( __FILE__ ) . '/backend/admin.php';
 }
 
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'jws_discount_label_action_links');
+function jws_discount_label_action_links($links) {
+    global $woocommerce;
+    if (version_compare($woocommerce->version, "2.1", ">=")) {
+        $setting_url = 'admin.php?page=discount-label';
+        // originall from woocommerce-enhanced-ecommerce-google-analytics-integration plugin
+    }
+    $links[] = '<a href="' . get_admin_url(null, $setting_url) . '">Settings</a>';
+    return $links;
+}
+
+
+
 /* todo add star rating to preview*/
+
+?>
 

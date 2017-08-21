@@ -26,7 +26,7 @@ function my_custom_submenu_page_callback() {
     
 
     /***************    Assign Defaults    ************************************************/
-    $options = get_option( 'options' );
+    $options = get_option( 'discountlabeloptions' );
     
     $options['display_style'] = isset($options['display_style']) ? $options['display_style'] : "bubble" ;
     $options['enabled'] = isset($options['enabled']) ? $options['enabled'] : "0" ;
@@ -114,7 +114,7 @@ function my_custom_submenu_page_callback() {
                             <tr valign="top" id="tr-<?php echo $jsw_select_array[$x]['slug'];?>">
                                 <th scope="row"><?php _e( $jsw_select_array[$x]['name'], 'plugin' ) ?></th>
                                 <td>
-                                    <select id="<?php echo ($jsw_select_array[$x]['slug']);?>" name="options[<?php echo $jsw_select_array[$x]['slug'] ?>]" class=" select">
+                                    <select id="<?php echo ($jsw_select_array[$x]['slug']);?>" name="discountlabeloptions[<?php echo $jsw_select_array[$x]['slug'] ?>]" class=" select">
                                         <?php foreach($jsw_select_array[$x]['options'] as $option): ?>
                                             <option <?php selected( $options[$jsw_select_array[$x]['slug']], $option[0] ); ?> value="<?php echo $option[0];?>"><?php echo $option[1];?></option>
                                         <?php endforeach; ?>
@@ -125,7 +125,7 @@ function my_custom_submenu_page_callback() {
                             <tr valign="top" id="tr-<?php echo $jsw_select_array[$x]['slug'];?>">
                                 <th scope="row"><?php _e( $jsw_select_array[$x]['name'], 'plugin' ) ?></th>
                                 <td>
-                                    <input type="text" id="<?php echo ($jsw_select_array[$x]['slug']);?>" name="options[<?php echo $jsw_select_array[$x]['slug'] ?>]"  value="<?php echo $options[$jsw_select_array[$x]['slug']];?>" class="<?php echo $jsw_select_array[$x]['slug'];?>" />
+                                    <input type="text" id="<?php echo ($jsw_select_array[$x]['slug']);?>" name="discountlabeloptions[<?php echo $jsw_select_array[$x]['slug'] ?>]"  value="<?php echo $options[$jsw_select_array[$x]['slug']];?>" class="<?php echo $jsw_select_array[$x]['slug'];?>" />
                                 </td>
                             </tr>
                         <?php endif; ?>
@@ -137,7 +137,7 @@ function my_custom_submenu_page_callback() {
                         <tr valign="top" id="tr-<?php echo $jsw_select_array[$x]['slug'];?>">
                             <th scope="row"><?php _e( $jsw_select_array[$x]['name'], 'plugin' ) ?></th>
                             <td>
-                                <select id="<?php echo ($jsw_select_array[$x]['slug']);?>" name="options[<?php echo $jsw_select_array[$x]['slug'] ?>]" class=" select">
+                                <select id="<?php echo ($jsw_select_array[$x]['slug']);?>" name="discountlabeloptions[<?php echo $jsw_select_array[$x]['slug'] ?>]" class=" select">
                                     <?php foreach($jsw_select_array[$x]['options'] as $option): ?>
                                         <option <?php selected( $options[$jsw_select_array[$x]['slug']], $option[0] ); ?> value="<?php echo $option[0];?>"><?php echo $option[1];?></option>
                                     <?php endforeach; ?>

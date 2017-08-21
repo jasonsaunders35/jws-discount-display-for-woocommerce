@@ -5,10 +5,10 @@ add_action( 'admin_init', 'store_register_settings' );
 function store_register_settings() {
 
     //register the array of settings
-    register_setting( 'settings-group', 'options', 'sanitize_options' );
+    register_setting( 'settings-group', 'discountlabeloptions', 'sanitize_options' );
 
 }
-function sanitize_options($options) {
+function sanitize_options($discountlabeloptions) {
     
     $jsw_select_array =  getConfigurationOptions();
     
@@ -21,7 +21,7 @@ function sanitize_options($options) {
     endforeach;
 
     // compare each submited option value against the full list of valid value
-    foreach($options as $option): 
+    foreach($discountlabeloptions as $option): 
         // tests
         $isValid = 0;
         if ( preg_match( '/^#[a-f0-9]{6}$/i', $option ) === 0 ) { // if user insert a HEX color with #     
@@ -48,5 +48,5 @@ function sanitize_options($options) {
         'Settings Saved Succusfully',
         'updated'
     );
-    return $options;
+    return $discountlabeloptions;
 }

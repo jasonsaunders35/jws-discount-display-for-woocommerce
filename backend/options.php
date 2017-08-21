@@ -38,6 +38,8 @@ function getConfigurationOptions(){
             array('outset',  'Outset'),
         );
     
+    $colorOptionList = array();// makes this array empty because it is being replaced by color picker 
+    
     $product_ids = wc_get_product_ids_on_sale();
     $productPreviewList = array();
         foreach($product_ids as $product_id){
@@ -85,7 +87,7 @@ function getConfigurationOptions(){
                 "order"=>4,
                 "slug"=>"csscolor",
                 "name"=>"Font Color",
-                "options"=> "" //$colorOptionList
+                "options"=> $colorOptionList
                 )
     );
     
@@ -93,7 +95,7 @@ function getConfigurationOptions(){
                 "order"=>5,
                 "slug"=>"cssbackgroundColor",
                 "name"=>"Background Color",
-                "options"=> "" //$colorOptionList
+                "options"=> $colorOptionList
                 )
     );
     
@@ -117,7 +119,7 @@ function getConfigurationOptions(){
                 "order"=>8,
                 "slug"=>"cssborderColor",
                 "name"=>"Border Color",
-                "options"=> "" //$colorOptionList
+                "options"=> $colorOptionList
                 )
     );
     

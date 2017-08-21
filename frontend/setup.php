@@ -84,7 +84,7 @@ jasonvisualdiscount = {
         }
         return style;
     },
-    currenySymbol: "$"
+    currenySymbol: "<?php echo  html_entity_decode(get_woocommerce_currency_symbol()); ?>"
     ,
     nominalDiscount: function(jthis){
            return Math.floor(jasonvisualdiscount.normalPrice(jthis) - jasonvisualdiscount.specialPrice(jthis));
