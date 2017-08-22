@@ -101,7 +101,7 @@ function getConfigurationOptions(){
     
     array_push($jsw_select_array, array(
                 "order"=>6,
-                "slug"=>"cssboxShadow",
+                "slug"=>"boxShadow",
                 "name"=>"Box Shadow",
                 "options"=> $yesNoOptionList
                 )

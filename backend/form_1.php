@@ -40,6 +40,29 @@ function my_custom_submenu_page_callback() {
     $options['useInProductDetail'] = isset($options['useInProductDetail']) ? $options['useInProductDetail'] : "1" ;
     $options['previewProduct'] = isset($options['previewProduct']) ? $options['previewProduct'] : wc_get_product_ids_on_sale()[0] ;
     
+    
+    function AssignOptionDefaults($option, $default){
+        $option = isset($option) ? $option : $default ;
+    }
+    
+    $option_default_array = [
+        [$options['display_style'], "bubble"], 
+        [$options['enabled'], "0" ],
+        [$options['discountmode'], "percent" ],
+        [$options['csscolor'], "#c90d00" ],
+        [$options['cssbackgroundColor'], "#27f4e0" ],
+        [$options['boxShadow'], "0" ],
+        [$options['cssborderWidth'], "2px" ],
+        [$options['cssborderColor'], "#108c00" ],
+        [$options['cssborderStyle'], "dashed" ],
+        [$options['useInProductDetail'], "1" ],
+        [$options['previewProduct'], wc_get_product_ids_on_sale()[0] ],        
+    ];
+    
+    for ($x = 0; $x < count($option_default_array); $x++){
+        AssignOptionDefaults($option_default_array[$x][0], $option_default_array[$x][1]);
+    }
+    
     /**************    Set Product for Preview ********************************************/
     
     $product_id = $options['previewProduct'];

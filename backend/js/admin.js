@@ -1,11 +1,12 @@
 /*============================================================
  *  Handle Preview 
 ==============================================================*/
+
 // Box Shadow
-jQuery("select[id*='enabled']").change(function(){
+jQuery('select[id*="enabled"]').change(function(){
     jthis = jQuery(this);
     var value = jthis.val();
-    if (value === "1"){
+    if ( '1' === value ){
         jQuery('.bubble').css('display','block');
     } else {
         jQuery('.bubble').css('display','none');
@@ -13,39 +14,42 @@ jQuery("select[id*='enabled']").change(function(){
 });
 
 // Discount Mode
-jQuery("select[id*='discountmode']").change(function(){
+jQuery('select[id*="discountmode"]').change(function(){
     jthis = jQuery(this);
     var mode = jthis.val();
-    if (mode === "percent"){
+    if ( 'percent' === mode ){
         jQuery('.bubble .discount').text(percent_discount+'%');
     }
-    if (mode === "nominal"){
-        jQuery('.bubble .discount').text('$'+dollar_discount);
+    if ( 'nominal' === mode ){
+        jQuery('.bubble .discount').text(currencySymbol+dollar_discount);
     }
 });
 
+// Handle Preview Prices Currency Symbol
+jQuery('.woocommerce-Price-currencySymbol').text(currencySymbol);
+
 // Style
-jQuery("select[id*='style']").change(function(){
+jQuery('select[id*="style"]').change(function(){
     jthis = jQuery(this);
     var style = jthis.val();
-    if (style != ""){
-        if (style === "bubble"){ // the default
+    if ( '' !== style ){
+        if ( 'bubble' === style ){ // the default
             jQuery('.bubble').removeClass('corner').removeClass('box');
         }
-        if (style === "corner"){
+        if ('corner' === style ){
             jQuery('.bubble').removeClass('box').addClass('corner');
         }
-        if (style === "box"){
+        if ('box' === style ){
             jQuery('.bubble').removeClass('corner').addClass('box');
         }
     }
 });
 
 // Box Shadow
-jQuery("select[id*='boxShadow']").change(function(){
+jQuery('select[id*="boxShadow"]').change(function(){
     jthis = jQuery(this);
     var value = jthis.val();
-    if (value === "1"){
+    if ('1' === value){
         jQuery('.bubble').addClass('boxshadow');
     } else {
         jQuery('.bubble').removeClass('boxshadow');
@@ -54,17 +58,18 @@ jQuery("select[id*='boxShadow']").change(function(){
 
 
 // Options that direcly control CSS
-jQuery("select[id*='css']").change(function(){
+jQuery('select[id*="css"]').change(function(){
     var jthis = jQuery(this);
     var value = jthis.val();
     var idString = jthis.attr('id');
-    var attribute = idString.substr(idString.indexOf("css") + 3)
-    if (value != "") {
+    var attribute = idString.substr(idString.indexOf('css') + 3)
+    if ('' !== value ) {
         jQuery('.bubble').css(attribute, value);
     }
 });
+
 // on page load
-jQuery(".entry-edit select").change(); 
+jQuery('.entry-edit select').change(); 
 
 /*============================================================
  *  Hiding / Showing Relevant Table Rows
@@ -72,13 +77,13 @@ jQuery(".entry-edit select").change();
 
 // Border Options
 var borderOptionRows = jQuery('#tr-cssborderColor,#tr-cssborderStyle');
-if (jQuery('#enabled').val() != '0'){
-    if (jQuery('#cssborderWidth').val() != '0'){
+if ( '0' !== jQuery('#enabled').val() ){
+    if ('0' !== jQuery('#cssborderWidth').val()){
         borderOptionRows.show();
     }
 }
 jQuery('#cssborderWidth').change(function(){
-   if (jQuery(this).val() != '0'){
+   if ('0' !== jQuery(this).val()){
         borderOptionRows.show();
    } else{
         borderOptionRows.hide();       
@@ -86,17 +91,17 @@ jQuery('#cssborderWidth').change(function(){
 });
 
 // All Form Content but 'Enabled' select
-var optionRows = jQuery(".entry-edit tr:not('#tr-enabled'), .entry-edit h2.advanced,.entry-edit div.instruction");
-if (jQuery('#enabled').val() != '0'){
+var optionRows = jQuery('.entry-edit tr:not("#tr-enabled"), .entry-edit h2.advanced,.entry-edit div.instruction');
+if ('0' !== jQuery('#enabled').val() ){
     optionRows.show();
     jQuery('#cssborderWidth').change();
 }
 jQuery('#enabled').change(function(){
-   if (jQuery(this).val() != '0'){
+   if ('0'  !== jQuery(this).val() ){
         optionRows.show();
         jQuery('#cssborderWidth').change();
    } else{
-        optionRows.hide();       
+        optionRows.hide();
    }
 });
 
@@ -107,11 +112,13 @@ jQuery('#enabled').change(function(){
 // handle position of corner style at different border widths
 var borderWidthSelect = jQuery('#cssborderWidth');
 var displayStyleSelect = jQuery('#display_style');
+
 // continuity problems get in the way of programtically measuring the original top & right positions, so hardcoding them
 var originalTop = '-11';
 var originalRight = '-41';
+
+// reset inline top and right position
 function adjustCornerPostion(){
-    // reset inline top and right position
     jQuery('.product .bubble').css('right','');
     jQuery('.product .bubble').css('top','');
     var discountBubbleElement = jQuery('.product .bubble.corner');
@@ -130,5 +137,3 @@ displayStyleSelect.change(function(){
     adjustCornerPostion();
 });
 adjustCornerPostion();
-
-
