@@ -73,7 +73,7 @@ var jwsVisualDiscount = {
            return Math.floor(jwsVisualDiscount.nominalDiscount(jthis)/jwsVisualDiscount.normalPrice(jthis)*100);
     },
     discountBubble: function(jthis){
-        var myElementString = "<span class='bubble'><span class='discount'></span><span class='off'>"+jwsVisualDiscount.offString+"</span></span>";
+        var myElementString = "<span class='jws-discount-label'><span class='discount'></span><span class='off'>"+jwsVisualDiscount.offString+"</span></span>";
         var ele = jQuery(myElementString); 
             switch(jwsVisualDiscount.style()) {
                 case 'corner':
@@ -113,7 +113,7 @@ var jwsVisualDiscount = {
     }, adjustCornerPosition(){
 
         // handle position of corner style at different border widths
-        var discountCornerElement = jQuery('.product .bubble.corner');
+        var discountCornerElement = jQuery('.product .jws-discount-label.corner');
         if (discountCornerElement.length > 0){
             var originalTop = discountCornerElement.css('top').replace('px','');
             var originalRight = discountCornerElement.css('right').replace('px','');
@@ -134,17 +134,21 @@ var jwsVisualDiscount = {
             // wc has no unique class for discounted products, so have to look for 2 prices for each item
             if (jthis.find('span.amount').length === 2){
                 if(jwsVisualDiscount.specialPrice(jthis)){
-                    if (jthis.hasClass('summary')){ // pdp 
-                       if (jwsDLConfigArray.useInProductDetail === '1'){ // if pdp section enabled
-                            ele = jQuery(".woocommerce-product-gallery");
-                       }
-                    } else { // any other type
+                    
+                    // product detail 
+                    if (jthis.hasClass('summary')){ 
+                        if (jwsDLConfigArray.useInProductDetail === '1'){ 
+                            ele = jQuery("#main");
+                            ele.css('position', 'relative');
+                            ele.prepend(jwsVisualDiscount.discountBubble(jthis));
+                        }
+                        
+                    // product thumbnails
+                    } else { 
                         var selector = ".woocommerce-LoopProduct-link:eq(0)";
-                        var ele = jthis.find(selector);          
-                    }
-                    if(typeof ele !== "undefined"){
+                        var ele = jthis.find(selector);  
                         ele.before(jwsVisualDiscount.discountBubble(jthis));
-                    }
+                    }                  
                 }
             }
         });

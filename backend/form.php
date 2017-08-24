@@ -83,7 +83,7 @@ function my_custom_submenu_page_callback() {
             var <?php echo $colorProperties[$x];?>Options = {
                 change: function(event, ui){
                     jQueryCssProp = '<?php echo str_replace("css","",$colorProperties[$x]);?>';
-                    jQuery(".bubble").css( jQueryCssProp, ui.color.toString());
+                    jQuery(".jws-discount-label").css( jQueryCssProp, ui.color.toString());
                 },
             };
         <?php endfor; ?>
@@ -95,7 +95,7 @@ function my_custom_submenu_page_callback() {
             
             //onPageLoad
             jQueryCssProp = '<?php echo str_replace("css","",$colorProperties[$x]);?>';
-            jQuery(".bubble").css( jQueryCssProp, jQuery('.<?php echo $colorProperties[$x]; ?>').val());
+            jQuery(".jws-discount-label").css( jQueryCssProp, jQuery('.<?php echo $colorProperties[$x]; ?>').val());
         <?php endfor; ?>
         });
     </script>
@@ -163,7 +163,7 @@ function my_custom_submenu_page_callback() {
             <h2><?php echo esc_html__( 'Preview', 'jwsdiscountlabel' ) ?></h2>
             <ul class = "products">
                 <li class="product type-product has-post-thumbnail product_cat-posters instock sale  purchasable ">
-                    <span class="bubble" style="display:none;"><span class="discount"></span><span class="off"><?php echo esc_html__('Off', 'jwsdiscountlabel'); ?></span></span>
+                    <span class="jws-discount-label" style="display:none;"><span class="discount"></span><span class="off"><?php echo esc_html__('Off', 'jwsdiscountlabel'); ?></span></span>
                     <a href="javascript:void(0)" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                         <img width="300" height="300" src="<?php echo $img_src; ?>" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="">
                         <h2 class="woocommerce-loop-product__title"><?php echo $title; ?></h2>

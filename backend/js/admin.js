@@ -7,9 +7,9 @@ jQuery('select[id*="enabled"]').change(function(){
     jthis = jQuery(this);
     var value = jthis.val();
     if ( '1' === value ){
-        jQuery('.bubble').css('display','block');
+        jQuery('.jws-discount-label').css('display','block');
     } else {
-        jQuery('.bubble').css('display','none');
+        jQuery('.jws-discount-label').css('display','none');
     }
 });
 
@@ -18,10 +18,10 @@ jQuery('select[id*="discountmode"]').change(function(){
     jthis = jQuery(this);
     var mode = jthis.val();
     if ( 'percent' === mode ){
-        jQuery('.bubble .discount').text(percent_discount+'%');
+        jQuery('.jws-discount-label .discount').text(percent_discount+'%');
     }
     if ( 'nominal' === mode ){
-        jQuery('.bubble .discount').text(currencySymbol+dollar_discount);
+        jQuery('.jws-discount-label .discount').text(currencySymbol+dollar_discount);
     }
 });
 
@@ -34,13 +34,13 @@ jQuery('select[id*="style"]').change(function(){
     var style = jthis.val();
     if ( '' !== style ){
         if ( 'bubble' === style ){ // the default
-            jQuery('.bubble').removeClass('corner').removeClass('box');
+            jQuery('.jws-discount-label').removeClass('corner').removeClass('box');
         }
         if ('corner' === style ){
-            jQuery('.bubble').removeClass('box').addClass('corner');
+            jQuery('.jws-discount-label').removeClass('box').addClass('corner');
         }
         if ('box' === style ){
-            jQuery('.bubble').removeClass('corner').addClass('box');
+            jQuery('.jws-discount-label').removeClass('corner').addClass('box');
         }
     }
 });
@@ -50,9 +50,9 @@ jQuery('select[id*="boxShadow"]').change(function(){
     jthis = jQuery(this);
     var value = jthis.val();
     if ('1' === value){
-        jQuery('.bubble').addClass('boxshadow');
+        jQuery('.jws-discount-label').addClass('boxshadow');
     } else {
-        jQuery('.bubble').removeClass('boxshadow');
+        jQuery('.jws-discount-label').removeClass('boxshadow');
     }
 });
 
@@ -64,7 +64,7 @@ jQuery('select[id*="css"]').change(function(){
     var idString = jthis.attr('id');
     var attribute = idString.substr(idString.indexOf('css') + 3)
     if ('' !== value ) {
-        jQuery('.bubble').css(attribute, value);
+        jQuery('.jws-discount-label').css(attribute, value);
     }
 });
 
@@ -119,9 +119,9 @@ var originalRight = '-41';
 
 // reset inline top and right position
 function adjustCornerPostion(){
-    jQuery('.product .bubble').css('right','');
-    jQuery('.product .bubble').css('top','');
-    var discountBubbleElement = jQuery('.product .bubble.corner');
+    jQuery('.product .jws-discount-label').css('right','');
+    jQuery('.product .jws-discount-label').css('top','');
+    var discountBubbleElement = jQuery('.product .jws-discount-label.corner');
     var borderWidthSelectVal = borderWidthSelect.val().replace('px','');
     if (discountBubbleElement){
         discountBubbleElement.css({
