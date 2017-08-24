@@ -45,7 +45,7 @@ function sanitize_options($discountlabeloptions) {
     add_settings_error(
         'discountLabelSuccessMessage',
         esc_attr( 'settings_updated' ),
-        'Settings Saved Succusfully',
+        'Settings Saved Successfully',
         'updated'
     );
     return $discountlabeloptions;
