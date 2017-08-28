@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Plugin Name: JWS Discount Label
+* Plugin Name: JWS Discount Label for WooCommerce
 * Description: Displays each discounted product's dollar or percent discount
 * Version: 1.0.0
 * Author: Jason William Saunders 
@@ -12,7 +12,6 @@
 
 
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-    define( 'JWS__PLUGIN_DIR', plugin_dir_path( __FILE__ ));
 
     // Frontend 
     require dirname( __FILE__ ) . '/frontend/setup.php';
@@ -32,3 +31,4 @@ function jws_discount_label_action_links($links) {
     return $links;
 }
 
+?>
