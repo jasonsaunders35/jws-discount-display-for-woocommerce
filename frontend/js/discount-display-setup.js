@@ -146,8 +146,9 @@ var jwsDiscountDisplay = {
         jwsDiscountDisplay.adjustCornerPosition();
     }
 };
+
 if( 'undefined' !== typeof jwsDDConfigArray ){
-	if ('1' === jwsDDConfigArray.enabled) {
-		jwsDiscountDisplay.render();
-	}
+    if ('1' === jwsDDConfigArray.enabled) {
+            jwsDiscountDisplay.render();
+    }
 }
