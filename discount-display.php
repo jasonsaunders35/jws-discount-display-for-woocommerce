@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Plugin Name: JWS Discount Label for WooCommerce
+* Plugin Name: JWS Discount Display for WooCommerce
 * Description: Displays each discounted product's dollar or percent discount
 * Version: 1.0.0
 * Author: Jason William Saunders 
@@ -9,7 +9,7 @@
 * Requires at least: 4.4
 * Tested up to: 4.8
 * 
-* Text Domain: jwsdiscountlabel
+* Text Domain: jwsdiscountdisplay
 */
 
 
@@ -22,12 +22,11 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
     require dirname( __FILE__ ) . '/backend/admin.php';
 }
 
-add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'jws_discount_label_action_links');
-function jws_discount_label_action_links($links) {
+add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'jws_discount_display_action_links');
+function jws_discount_display_action_links($links) {
     global $woocommerce;
     if (version_compare($woocommerce->version, "2.1", ">=")) {
-        $setting_url = 'admin.php?page=discount-label';
-        // original from woocommerce-enhanced-ecommerce-google-analytics-integration plugin
+        $setting_url = 'admin.php?page=discount-display';
     }
     $links[] = '<a href="' . get_admin_url(null, $setting_url) . '">Settings</a>';
     return $links;

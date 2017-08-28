@@ -139,19 +139,19 @@ ul.products span.amount{
     font-size: 14px;
 }
 
-.discount-label-form
+.discount-display-form
 {
     float: left;
     width: 450px;
 }
 
-.discount-label-preview
+.discount-display-preview
 {
    float: left;
     width: 400px;   
 }
 
-.discount-label-form td select {
+.discount-display-form td select {
     width: 230px;
 }
 p.submit{
@@ -176,13 +176,13 @@ p.submit{
     text-align: center;
 }
 
-.discount-label-preview h2, 
-.discount-label-preview ul
+.discount-display-preview h2, 
+.discount-display-preview ul
 {
     width: 230px;
     margin: 0 auto;
 }
-.discount-label-preview h2
+.discount-display-preview h2
 {
     text-align: center;
     margin: 0 auto 30px auto;

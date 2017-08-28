@@ -5,10 +5,10 @@ add_action( 'admin_init', 'store_register_settings' );
 function store_register_settings() {
 
     //register the array of settings
-    register_setting( 'settings-group', 'discountlabeloptions', 'sanitize_options' );
+    register_setting( 'settings-group', 'discountdisplayoptions', 'sanitize_options' );
 }
 
-function sanitize_options($discountlabeloptions) {
+function sanitize_options($discountdisplayoptions) {
     
     // create the full list of all valid pre-defined option value
     $jsw_select_array =  getConfigurationOptions();
@@ -20,7 +20,7 @@ function sanitize_options($discountlabeloptions) {
     endforeach;
 
     // compare each submitted option value against the full list of valid values
-    foreach($discountlabeloptions as $option): 
+    foreach($discountdisplayoptions as $option): 
         
         // tests
         $isValid = 0;
@@ -34,7 +34,7 @@ function sanitize_options($discountlabeloptions) {
         // return with error message if both tests fail
         if($isValid == 2){
             add_settings_error(
-                'discountLabelErrorMessage',
+                'discountDisplayErrorMessage',
                 esc_attr( 'settings_updated' ),
                 'An error occurred. Please try again.',
                 'error'
@@ -45,10 +45,10 @@ function sanitize_options($discountlabeloptions) {
     
     // use rather poorly named WP function to add success message 
     add_settings_error(
-        'discountLabelSuccessMessage',
+        'discountDisplaySuccessMessage',
         esc_attr( 'settings_updated' ),
         'Settings Saved Successfully',
         'updated'
     );
-    return $discountlabeloptions;
+    return $discountdisplayoptions;
 }

@@ -1,14 +1,14 @@
 <?php
 
-add_action('admin_head', 'discountlabel_backend_all_scriptsandstyles');
-function discountlabel_backend_all_scriptsandstyles(){
-    wp_register_style( 'jws_discountlabel_backend_preview', plugins_url( 'css/style.css', __FILE__ ), array(), '', 'all' );
-    wp_register_style( 'jws_discountlabel_shared', plugins_url( '../css/style.css', __FILE__ ), array(), '', 'all' );
-    wp_enqueue_style( 'jws_discountlabel_backend_preview');
-    wp_enqueue_style( 'jws_discountlabel_shared');
+add_action('admin_head', 'discountdisplay_backend_all_scriptsandstyles');
+function discountdisplay_backend_all_scriptsandstyles(){
+    wp_register_style( 'jws_discountdisplay_backend_preview', plugins_url( 'css/style.css', __FILE__ ), array(), '', 'all' );
+    wp_register_style( 'jws_discountdisplay_shared', plugins_url( '../css/style.css', __FILE__ ), array(), '', 'all' );
+    wp_enqueue_style( 'jws_discountdisplay_backend_preview');
+    wp_enqueue_style( 'jws_discountdisplay_shared');
   
-    wp_register_script('jws_discountlabel_backend_script', plugins_url('js/admin.js', __FILE__), array('jquery'),'1.1', true);
-    wp_enqueue_script('jws_discountlabel_backend_script');
+    wp_register_script('jws_discountdisplay_backend_script', plugins_url('js/admin.js', __FILE__), array('jquery'),'1.1', true);
+    wp_enqueue_script('jws_discountdisplay_backend_script');
 }
 
 /*============================================================
@@ -26,7 +26,7 @@ function my_custom_submenu_page_callback() {
     /*============================================================
      *  Assign Option Defaults
     ==============================================================*/
-    $options = get_option( 'discountlabeloptions' );
+    $options = get_option( 'discountdisplayoptions' );
     if ( ! is_array($options)){
 		$options = [];
     }
@@ -95,7 +95,7 @@ function my_custom_submenu_page_callback() {
             var <?php echo $colorCssProperties[$x]; ?>Options = {
                 change: function(event, ui){
                     jQueryCssProp = '<?php echo str_replace("css","",$colorCssProperties[$x]);?>';
-                    jQuery(".jws-discount-label").css( jQueryCssProp, ui.color.toString());
+                    jQuery(".jws-discount-display").css( jQueryCssProp, ui.color.toString());
                 }
             };
         <?php endfor; ?>
@@ -108,18 +108,18 @@ function my_custom_submenu_page_callback() {
 
                 // update preview based values returned from color pickers on Page Load
                 jQueryCssProp = '<?php echo str_replace("css","",$colorCssProperties[$x]);?>';
-                jQuery(".jws-discount-label").css( jQueryCssProp, jQuery('.<?php echo $colorCssProperties[$x]; ?>').val());
+                jQuery(".jws-discount-display").css( jQueryCssProp, jQuery('.<?php echo $colorCssProperties[$x]; ?>').val());
             <?php endfor; ?>
         });
     </script>
 
     <div class="wrap entry-edit">
-        <div class ="discount-label-form">
+        <div class ="discount-display-form">
             <?php settings_errors() ?>
 
             <form method="post" action="options.php">
                 <?php settings_fields( 'settings-group' ); ?>
-                <h2><?php echo esc_html__( 'General Settings', 'jwsdiscountlabel' ) ?></h2>
+                <h2><?php echo esc_html__( 'General Settings', 'jwsdiscountdisplay' ) ?></h2>
                 <table class="form-table">
                     <?php 
                     
@@ -129,9 +129,9 @@ function my_custom_submenu_page_callback() {
                         // If Color Property
                         if( stripos($jws_select_array[$x]['slug'], 'color') === false):?> 
                             <tr valign="top" id="tr-<?php echo $jws_select_array[$x]['slug'];?>">
-                                <th scope="row"><?php echo esc_html__( $jws_select_array[$x]['name'], 'jwsdiscountlabel' ) ?></th>
+                                <th scope="row"><?php echo esc_html__( $jws_select_array[$x]['name'], 'jwsdiscountdisplay' ) ?></th>
                                 <td>
-                                    <select id="<?php echo ($jws_select_array[$x]['slug']);?>" name="discountlabeloptions[<?php echo $jws_select_array[$x]['slug'] ?>]" class="select">
+                                    <select id="<?php echo ($jws_select_array[$x]['slug']);?>" name="discountdisplayoptions[<?php echo $jws_select_array[$x]['slug'] ?>]" class="select">
                                         <?php foreach($jws_select_array[$x]['options'] as $option): ?>
                                             <option <?php selected( $options[$jws_select_array[$x]['slug']], $option[0] ); ?> value="<?php echo $option[0];?>"><?php echo esc_html__($option[1]);?></option>
                                         <?php endforeach; ?>
@@ -143,27 +143,27 @@ function my_custom_submenu_page_callback() {
                         // Else (Non-Color Property)
                         else: ?> 
                             <tr valign="top" id="tr-<?php echo $jws_select_array[$x]['slug'];?>">
-                                <th scope="row"><?php echo esc_html__($jws_select_array[$x]['name'], 'jwsdiscountlabel' ) ?></th>
+                                <th scope="row"><?php echo esc_html__($jws_select_array[$x]['name'], 'jwsdiscountdisplay' ) ?></th>
                                 <td>
-                                    <input type="text" id="<?php echo ($jws_select_array[$x]['slug']);?>" name="discountlabeloptions[<?php echo $jws_select_array[$x]['slug'] ?>]"  value="<?php echo $options[$jws_select_array[$x]['slug']];?>" class="<?php echo $jws_select_array[$x]['slug'];?>" />
+                                    <input type="text" id="<?php echo ($jws_select_array[$x]['slug']);?>" name="discountdisplayoptions[<?php echo $jws_select_array[$x]['slug'] ?>]"  value="<?php echo $options[$jws_select_array[$x]['slug']];?>" class="<?php echo $jws_select_array[$x]['slug'];?>" />
                                 </td>
                             </tr>
                         <?php endif; ?>
                     <?php endfor; ?>
                 </table>
                 
-                <h2 class='advanced'><?php echo esc_html__( 'Advanced Settings', 'jwsdiscountlabel' ) ?></h2>
+                <h2 class='advanced'><?php echo esc_html__( 'Advanced Settings', 'jwsdiscountdisplay' ) ?></h2>
                 <table class="form-table">
                     <?php 
                     
                     // Last 2 'Advanced' Settings
                     for ($x =  count($jws_select_array)-2; $x < count($jws_select_array); $x++): ?>
                         <tr valign="top" id="tr-<?php echo $jws_select_array[$x]['slug'];?>">
-                            <th scope="row"><?php echo esc_html__( $jws_select_array[$x]['name'], 'jwsdiscountlabel' ) ?></th>
+                            <th scope="row"><?php echo esc_html__( $jws_select_array[$x]['name'], 'jwsdiscountdisplay' ) ?></th>
                             <td>
-                                <select id="<?php echo ($jws_select_array[$x]['slug']);?>" name="discountlabeloptions[<?php echo $jws_select_array[$x]['slug'] ?>]" class=" select">
+                                <select id="<?php echo ($jws_select_array[$x]['slug']);?>" name="discountdisplayoptions[<?php echo $jws_select_array[$x]['slug'] ?>]" class=" select">
                                     <?php foreach($jws_select_array[$x]['options'] as $option): ?>
-                                        <option <?php selected( $options[$jws_select_array[$x]['slug']], $option[0] ); ?> value="<?php echo $option[0];?>"><?php echo esc_html($option[1], 'jwsdiscountlabel' );?></option>
+                                        <option <?php selected( $options[$jws_select_array[$x]['slug']], $option[0] ); ?> value="<?php echo $option[0];?>"><?php echo esc_html($option[1], 'jwsdiscountdisplay' );?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </td>
@@ -172,16 +172,16 @@ function my_custom_submenu_page_callback() {
                 </table>
                 <div class = 'instruction'><span class = 'ast'>*</span>Save Changes to update the preview product.</div>
                 <p class="submit">
-                    <input type="submit" class="button-primary" value="<?php echo esc_html__( 'Save Changes', 'jwsdiscountlabel' ); ?>" />
+                    <input type="submit" class="button-primary" value="<?php echo esc_html__( 'Save Changes', 'jwsdiscountdisplay' ); ?>" />
                 </p>
 
             </form>
         </div>
-        <div class = "discount-label-preview">
-            <h2><?php echo esc_html__( 'Preview', 'jwsdiscountlabel' ) ?></h2>
+        <div class = "discount-display-preview">
+            <h2><?php echo esc_html__( 'Preview', 'jwsdiscountdisplay' ) ?></h2>
             <ul class = "products">
                 <li class="product type-product has-post-thumbnail product_cat-posters instock sale  purchasable ">
-                    <span class="jws-discount-label" style="display:none;"><span class="discount"></span><span class="off"><?php echo esc_html__('Off', 'jwsdiscountlabel'); ?></span></span>
+                    <span class="jws-discount-display" style="display:none;"><span class="discount"></span><span class="off"><?php echo esc_html__('Off', 'jwsdiscountdisplay'); ?></span></span>
                     <a href="javascript:void(0)" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                         <img width="300" height="300" src="<?php echo $img_src; ?>" class="attachment-shop_catalog size-shop_catalog wp-post-image" alt="">
                         <h2 class="woocommerce-loop-product__title"><?php echo $title; ?></h2>
