@@ -6,6 +6,8 @@
 * Version: 1.0.0
 * Author: Jason William Saunders 
 * License: GPL2
+* Requires at least: 4.4
+* Tested up to: 4.8
 * 
 * Text Domain: jwsdiscountlabel
 */
