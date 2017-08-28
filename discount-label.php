@@ -30,5 +30,3 @@ function jws_discount_label_action_links($links) {
     $links[] = '<a href="' . get_admin_url(null, $setting_url) . '">Settings</a>';
     return $links;
 }
-
-?>
