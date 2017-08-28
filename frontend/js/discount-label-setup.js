@@ -124,16 +124,19 @@ var jwsVisualDiscount = {
             // if there is a <del> (containing 'normal price') && a special price can be calculated 
             if (( 1 === jthis.find('.price del').length) && (jwsVisualDiscount.specialPrice(jthis)) ){
                     
-                // if element is the (product detail) summary && discount label is configured for it
-                if ((jthis.hasClass('summary')) && ('1' === jwsDLConfigArray.useInProductDetail)){
-                     
+                // if element is the (product detail) summary
+                if ((this.hasClass('summary'){
+					
+					// if discount label is enabled for (product detail) summary
+					if ('1' === jwsDLConfigArray.useInProductDetail){
                         // attach the discount label element to the main element
                         var ele = jQuery("main");
                         if ('corner' === jwsVisualDiscount.style() ){
                             ele.css('overflow', 'hidden');
                         }
                         ele.prepend(jwsVisualDiscount.discountBubble(jthis));
-
+					}
+					
                 // product thumbnails
                 } else { 
                     jthis.prepend(jwsVisualDiscount.discountBubble(jthis));
