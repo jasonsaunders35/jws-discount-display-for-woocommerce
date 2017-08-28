@@ -19,8 +19,6 @@ function mw_enqueue_color_picker( $hook_suffix ) {
 }
 
 function my_custom_submenu_page_callback() {
-    
-    $jws_select_array =  getConfigurationOptions();
 
     /***************    Assign Defaults    ************************************************/
     $options = get_option( 'discountlabeloptions' );
@@ -58,7 +56,9 @@ function my_custom_submenu_page_callback() {
     
 
     /***************    sort configuration options by 'order' key     **********************/
-    //define a comparison function
+	$jws_select_array =  getConfigurationOptions();
+    
+	//define a comparison function
     function cmp($a, $b) {
         if ($a['order'] == $b['order']) {
             return 0;
