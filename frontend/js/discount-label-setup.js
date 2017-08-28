@@ -146,4 +146,6 @@ var jwsVisualDiscount = {
         jwsVisualDiscount.adjustCornerPosition();
     }
 };
-jwsVisualDiscount.render();
+if ('1' === jwsDLConfigArray.enabled) {
+	jwsVisualDiscount.render();
+}
