@@ -1,13 +1,13 @@
-/* li */
+/*============================================================
+ *  Product Preview
+==============================================================*/
 
+/* li */
 ul.products li.product {
     clear: none;
     width: 100%;
     float: left;
     font-size: .875em;
-}
-
-ul.products li.product {
     list-style: none;
     margin-left: 0;
     margin-bottom: 4.235801032em;
@@ -28,27 +28,11 @@ ul.products li.product .woocommerce-LoopProduct-link {
     display: block;
 }
 
-a {
-    color: #96588a;
-}
-
-a {
+ul.products li.product a {
     color: #2c2d33;
     text-decoration: none;
     font-weight: 400;
-}
-
-a {
     background-color: transparent;
-}
-
-@media (min-width: 768px){
-    ul.products li.product {
-        clear: none;
-        width: 100%;
-        float: left;
-        font-size: .875em;
-    }
 }
 
 ul.products li.product {
@@ -60,43 +44,28 @@ ul.products li.product {
 }
 
 /* img */
-
 ul.products li.product img {
     display: block;
     margin: 0 auto 1.618em;
-}
-
-img {
-    border-radius: 3px;
-}
-
-img {
     height: auto;
     max-width: 100%;
     display: block;
-}
-
-img {
     border: 0;
 }
 
 /* h2 */
-ul.products li.product .woocommerce-loop-product__title, ul.products li.product h2, ul.products li.product h3 {
+ul.products li.product .woocommerce-loop-product__title,
+ul.products li.product h2, 
+ul.products li.product h3 {
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: .5407911001em;
 }
 
-h2 {
+ul.products li.product h2{
     color: #333333;
-}
-
-h2 {
     font-size: 2em;
     line-height: 1.214;
-}
-
-h2{
     clear: both;
     font-weight: 300;
     margin: 0 0 .5407911001em;
@@ -105,13 +74,7 @@ h2{
 
 .onsale {
     border-color: #6d6d6d;
-}
-
-.onsale{
     color: #6d6d6d;
-}
-
-.onsale {
     border: 1px solid;
     border-color: #43454b;
     color: #43454b;
@@ -122,28 +85,17 @@ h2{
     display: inline-block;
     margin-bottom: 1em;
     border-radius: 3px;
-}
-.onsale{
     color: #6d6d6d;
 }
 
 /* price */
 ul.products li.product .price {
     color: #6d6d6d;
-}
-
-ul.products li.product .price {
     display: block;
     color: #43454b;
     font-weight: 400;
     margin-bottom: 1rem;
-}
-
-ul.products li.product .price {
     color: #6d6d6d;
-}
-
-ul.products li.product .price {
     display: block;
     color: #43454b;
     font-weight: 400;
@@ -155,10 +107,8 @@ ul.products li.product .price {
     font-weight: 400;
 }
 
-.price ins {
-    font-weight: 400;
-}
 ul.products li.product .price ins {
+    font-weight: 400;
     margin-left: .6180469716em;
     background-color: transparent;
 }
@@ -173,7 +123,9 @@ ins, mark {
     background: 0 0;
 }
 
-/**************************** custom **************/
+/*============================================================
+ *  Custom
+==============================================================*/
 
 ul.products li.product{
     width: 230px;
@@ -208,11 +160,8 @@ p.submit{
 #tr-previewProduct th, #tr-previewProduct td {
     padding-bottom: 0;
 }
-div.instruction{
-    display:block;
-    margin-bottom: 15px;
-}
 
+/* horizantal lines for clarity */
 .entry-edit table:nth-of-type(1) tr:nth-of-type(2) {
     border-top: 2px solid black !important;
 }
@@ -226,7 +175,6 @@ div.instruction{
 .entry-edit h2{
     text-align: center;
 }
-
 
 .discount-label-preview h2, 
 .discount-label-preview ul
@@ -244,7 +192,7 @@ div.instruction{
     line-height: 21px;
 }
 
-/*** user design ***/
+/*  dynamic form controls */
 
 .entry-edit tr, 
 .entry-edit h2.advanced,
@@ -254,4 +202,14 @@ div.instruction{
 }
 #tr-enabled{
     display:table-row;
+}
+
+/* intructions */
+
+.ast{
+    color:red;
+}
+tr#tr-previewProduct th::after {
+    content: '*';
+    color:red;
 }

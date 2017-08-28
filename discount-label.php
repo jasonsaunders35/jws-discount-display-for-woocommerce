@@ -32,5 +32,3 @@ function jws_discount_label_action_links($links) {
     return $links;
 }
 
-?>
-

@@ -1,14 +1,16 @@
 // Manually define as 'bubble', 'corner', or 'box'
 var jwsVisualDiscountStyle = ''; 
 
-
+// Manually define as 'percent' or 'nominal'
 var jwsVisualDiscountMode = ''; 
+
+// jwsDLConfigArray defined in setup.php 
+var jwsDLConfigArray = jwsDLConfigArray;
 
 var jwsVisualDiscount = {
     normalPrice: function(jthis){
         var selector = 'del span.amount'; 
         return Math.abs(Number((jthis.find(selector).text()).replace(/[^0-9\.]+/g,'')));
-
     },
     specialPrice: function(jthis){
         var selector = 'ins span.amount'; 
@@ -18,54 +20,47 @@ var jwsVisualDiscount = {
         var mode =  jwsDLConfigArray.discountmode;
 
         // if defined manually above
-        if (typeof(jwsVisualDiscountMode) !== "undefined"){
-            if (jwsVisualDiscountMode==="percent" || jwsVisualDiscountMode==="nominal"){
+        if ( "undefined" === ! typeof(jwsVisualDiscountMode)){
+            if ("percent" === jwsVisualDiscountMode || "nominal" === jwsVisualDiscountMode){
                 var mode =  jwsVisualDiscountMode;
             }
         }
 
         // if specified in the url (parameter name: DiscountLabelStyle)
-        if (location.search !== "undefined"){
+        if ("undefined" !== location.search ){
             urlparams = location.search;
-            if (urlparams.search("DiscountLabelMode=percent") !== -1){
+            if (-1 !== urlparams.search("DiscountLabelMode=percent")){
                 var mode =  "percent";
             }
-            if (urlparams.search("DiscountLabelMode=nominal") !== -1){
+            if (-1 !== urlparams.search("DiscountLabelMode=nominal")){
                 var mode =  "nominal";
             }
         }
-
         return mode;
      },
     style: function(){
         var style =  jwsDLConfigArray.display_style;
 
         // if defined manually above
-        if (jwsVisualDiscountStyle==="bubble" || jwsVisualDiscountStyle==="corner" || jwsVisualDiscountStyle==="box"){
+        if ("bubble" === jwsVisualDiscountStyle|| "corner" ===jwsVisualDiscountStyle || "box"  ===jwsVisualDiscountStyle){
             var style =  jwsVisualDiscountStyle;
         }
 
         // if specified in the url (parameter name: DiscountLabelStyle)
-        if (location.search != "undefined"){
+        if ( "undefined" !==  location.search){
             urlparams = location.search;
-            if (urlparams.search("DiscountLabelStyle=bubble")!=-1){
+            if (-1 !== urlparams.search("DiscountLabelStyle=bubble") ){
                 var style =  "bubble";
             }
-            if (urlparams.search("DiscountLabelStyle=corner")!=-1){
+            if (-1 !==  urlparams.search("DiscountLabelStyle=corner")){
                 var style =  "corner";
             }
-            if (urlparams.search("DiscountLabelStyle=box")!=-1){
+            if (-1 !== urlparams.search("DiscountLabelStyle=box")){
                 var style =  "box";
             }
         }
         return style;
     },
-    currencySymbol: jwsDLConfigArray.currencySymbol
-    ,
-    offString: jwsDLConfigArray.offString
-    ,   
-    boxShadow: jwsDLConfigArray.boxShadow
-    ,
     nominalDiscount: function(jthis){
            return Math.floor(jwsVisualDiscount.normalPrice(jthis) - jwsVisualDiscount.specialPrice(jthis));
     },
@@ -73,7 +68,7 @@ var jwsVisualDiscount = {
            return Math.floor(jwsVisualDiscount.nominalDiscount(jthis)/jwsVisualDiscount.normalPrice(jthis)*100);
     },
     discountBubble: function(jthis){
-        var myElementString = "<span class='jws-discount-label'><span class='discount'></span><span class='off'>"+jwsVisualDiscount.offString+"</span></span>";
+        var myElementString = "<span class='jws-discount-label'><span class='discount'></span><span class='off'>"+jwsDLConfigArray.offString+"</span></span>";
         var ele = jQuery(myElementString); 
             switch(jwsVisualDiscount.style()) {
                 case 'corner':
@@ -81,39 +76,34 @@ var jwsVisualDiscount = {
                     break;
                 case 'box':
                     ele.addClass('box');
-                    break;
-                default:
-                    //code block
             }
 
             /* Discount or Percent*/
             switch(jwsVisualDiscount.mode()) {
                 case 'nominal':
-                    ele.find('span.discount').text(jwsVisualDiscount.currencySymbol+jwsVisualDiscount.nominalDiscount(jthis));  
+                    ele.find('span.discount').text(jwsDLConfigArray.currencySymbol+jwsVisualDiscount.nominalDiscount(jthis));  
                     break;
                 case 'percent':
-                    ele.find('span.discount').text(jwsVisualDiscount.percentDiscount(jthis)+"%");  
-                    break;
-                default:
-                    //code block
+                    ele.find('span.discount').text(jwsVisualDiscount.percentDiscount(jthis)+"%");
             }
 
             /* AddBoxShadow */
-            if ('1' === jwsVisualDiscount.boxShadow){
+            if ('1' === jwsDLConfigArray.boxShadow  ){
                 ele.addClass('boxshadow');
             }
 
             for (var k in jwsDLConfigArray){
-                if ((k.search('css') !== -1) || (jwsDLConfigArray[k] === "")){
+                if (( -1 !== k.search('css')) || ("" === jwsDLConfigArray[k] )){
                     var prop = k.replace('css','');
                     ele.css(prop,jwsDLConfigArray[k]);
                 }
             }
         return ele;
-    }, adjustCornerPosition(){
+    }, 
+    adjustCornerPosition: function(){
 
         // handle position of corner style at different border widths
-        var discountCornerElement = jQuery('.product .jws-discount-label.corner');
+        var discountCornerElement = jQuery('.jws-discount-label.corner');
         if (discountCornerElement.length > 0){
             var originalTop = discountCornerElement.css('top').replace('px','');
             var originalRight = discountCornerElement.css('right').replace('px','');
@@ -125,34 +115,32 @@ var jwsVisualDiscount = {
                 });
             }); 
         }
-    } ,collectSpecialItems: function(){
+    }, 
+    render: function(){
         var saleProductSelector = 'ul.products li.product, .summary';
         jQuery(saleProductSelector).each(function(){
-
             var jthis = jQuery(this);
 
-            // wc has no unique class for discounted products, so have to look for 2 prices for each item
-            if (jthis.find('span.amount').length === 2){
-                if(jwsVisualDiscount.specialPrice(jthis)){
+            // if there is a <del> (containing 'normal price') && a special price can be calculated 
+            if (( 1 === jthis.find('.price del').length) && (jwsVisualDiscount.specialPrice(jthis)) ){
                     
-                    // product detail 
-                    if (jthis.hasClass('summary')){ 
-                        if (jwsDLConfigArray.useInProductDetail === '1'){ 
-                            ele = jQuery("#main");
-                            ele.css('position', 'relative');
-                            ele.prepend(jwsVisualDiscount.discountBubble(jthis));
+                // if element is the (product detail) summary && discount label is configured for it
+                if ((jthis.hasClass('summary')) && ('1' === jwsDLConfigArray.useInProductDetail)){
+                     
+                        // attach the discount label element to the main element
+                        var ele = jQuery("main");
+                        if ('corner' === jwsVisualDiscount.style() ){
+                            ele.css('overflow', 'hidden');
                         }
-                        
-                    // product thumbnails
-                    } else { 
-                        var selector = ".woocommerce-LoopProduct-link:eq(0)";
-                        var ele = jthis.find(selector);  
-                        ele.before(jwsVisualDiscount.discountBubble(jthis));
-                    }                  
+                        ele.prepend(jwsVisualDiscount.discountBubble(jthis));
+
+                // product thumbnails
+                } else { 
+                    jthis.prepend(jwsVisualDiscount.discountBubble(jthis));
                 }
             }
         });
         jwsVisualDiscount.adjustCornerPosition();
     }
 };
-jwsVisualDiscount.collectSpecialItems();
+jwsVisualDiscount.render();

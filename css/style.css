@@ -1,6 +1,15 @@
-.product-image
-{
+/*============================================================
+ * General
+==============================================================*/
+
+li.product, 
+.product-template-default #main{
     position:relative;
+}
+
+/* set for product detail section with js for the corner style*/
+li.product{
+    overflow: hidden;
 }
 
 span.jws-discount-label {
@@ -12,35 +21,21 @@ span.jws-discount-label {
     -webkit-border-radius:25px;
     -moz-border-radius:25px;
     border-radius:25px;
-    z-index:1;
-    border-width:1px;
     font-size: 16px;
-    font-weight: bold;
+    z-index: 1;
 }
-span.jws-discount-label.box {
-    top:0;
-    right:0;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
-}
+
 span.jws-discount-label span{
+    font-weight: 700;
     line-height: 1;
     display: block;
     text-align:center;
-    vertical-align: bottom;
     position: relative;
     top: 1px;
 }
-span.jws-discount-label.corner span{
-    top: 0;
-}
+
 span.jws-discount-label span.off {
     text-transform: uppercase;
-}
-
-.zoomContainer{
-    z-index:3;
 }
 
 span.jws-discount-label.boxshadow{
@@ -49,12 +44,18 @@ span.jws-discount-label.boxshadow{
     box-shadow: gray -1px 1px 2px;
 }
 
-/*corner style*/
-
-div.product, li{
-    overflow: hidden;
+/*============================================================
+ * Pre-defined Style Types
+==============================================================*/
+span.jws-discount-label.box {
+    top:0;
+    right:0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
-div.product span.corner.jws-discount-label, li span.corner.jws-discount-label {
+
+span.jws-discount-label.corner {
     top: -11px;
     right: -41px;
     -ms-transform: rotate(45deg);
@@ -63,14 +64,21 @@ div.product span.corner.jws-discount-label, li span.corner.jws-discount-label {
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
     padding: 21px 40px 1px 40px;
-    border-radius: 0;
+    -webkit-border-radius:0;
+    -moz-border-radius:0;
+    border-radius:0;
 }
+
+span.jws-discount-label.corner span{
+    top: 0;
+}
+
 .ie8 .jws-discount-label.corner {
     display:none !important;
 }
 
 @media (max-width:767px){
-    .product-template-default .jws-discount-label{
+    .product-template-default .jws-discount-label:not(.corner){
         margin-top: -10px     
     }
 }

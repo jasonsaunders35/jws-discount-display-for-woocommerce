@@ -1,7 +1,9 @@
 <?php
 function getConfigurationOptions(){
     
-    /***************    Assign Option Sets            ************************************************/
+    /*============================================================
+     *  Assign Option Sets
+    ==============================================================*/
     $yesNoOptionList = array(
         array('1','Yes'),
         array('0','No'),
@@ -14,49 +16,45 @@ function getConfigurationOptions(){
     );
     
     $discountModeOptionList = array(
-                        array('percent','Percent Off'),
-                        array('nominal','Dollar Off'),
+        array('percent','Percent Off'),
+        array('nominal','Dollar Off'),
     );
     
     $borderWidthOptionList = array(
-            array('0', '0 (no border)'),
-            array('1px', '1 pixel '),
-            array('2px', '2 pixels '),
-            array('3px', '3 pixels '),
-            array('4px', '4 pixels '),
-            array('5px', '5 pixels ')
-        );
+        array('0', '0 (no border)'),
+        array('1px', '1 pixel '),
+        array('2px', '2 pixels '),
+        array('3px', '3 pixels '),
+        array('4px', '4 pixels '),
+        array('5px', '5 pixels ')
+    );
     
     $borderStyleOptionList = array(
-            array('solid',  'Solid'),
-            array('double',  'Double'),
-            array('dotted',  'Dotted'),
-            array('dashed',  'Dashed'),
-            array('groove',  'Groove'),
-            array('ridge',  'Ridge'),
-            array('inset',  'Inset'),
-            array('outset',  'Outset'),
-        );
+        array('solid',  'Solid'),
+        array('double',  'Double'),
+        array('dotted',  'Dotted'),
+        array('dashed',  'Dashed'),
+        array('groove',  'Groove'),
+        array('ridge',  'Ridge'),
+        array('inset',  'Inset'),
+        array('outset',  'Outset'),
+    );
     
-    $colorOptionList = array();// makes this array empty because it is being replaced by color picker 
+    /*============================================================
+     *  Other Option Lists
+    ==============================================================*/
+    
+    $colorOptionList = array();// empty because color selection is being handled by color pickers
     
     $product_ids = wc_get_product_ids_on_sale();
     $productPreviewList = array();
-        foreach($product_ids as $product_id){
-            array_push($productPreviewList,array($product_id,  wc_get_product($product_id)->get_title()));
-        }
-    
-    $allOptionValuesList = array("");
-    $typeOfOptionsList = array( 'yesNo', 'displayStyle', 'discountMode', 'borderWidth', 'borderStyle');
-    
-    for ($i = 0; $i < count($typeOfOptionsList); $i++){
-        $optionList = ${$typeOfOptionsList[$i] . 'OptionList'};
-        for ($x = 0; $x < count($optionList); $x++){
-            $allOptionValuesList[] = $optionList[$x][0];
-        }
+    foreach($product_ids as $product_id){
+        array_push($productPreviewList,array($product_id,  wc_get_product($product_id)->get_title()));
     }
     
-    /***************    Create Configuration Array    ************************************************/
+    /*============================================================
+     *  Configuration Object
+    ==============================================================*/
     $jsw_select_array = array();
     
     array_push($jsw_select_array, array(
@@ -143,7 +141,7 @@ function getConfigurationOptions(){
     array_push($jsw_select_array, array(
                 "order"=>12,
                 "slug"=>"previewProduct",
-                "name"=>"Product To Use In Preview*",
+                "name"=>"Product To Use In Preview",
                 "options"=> $productPreviewList
                 )
     );
