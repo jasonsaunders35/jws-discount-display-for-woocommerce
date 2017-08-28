@@ -125,7 +125,7 @@ var jwsVisualDiscount = {
             if (( 1 === jthis.find('.price del').length) && (jwsVisualDiscount.specialPrice(jthis)) ){
                     
                 // if element is the (product detail) summary
-                if (this.hasClass('summary'){
+                if (jthis.hasClass('summary')){
 					
 					// if discount label is enabled for (product detail) summary
 					if ('1' === jwsDLConfigArray.useInProductDetail){
