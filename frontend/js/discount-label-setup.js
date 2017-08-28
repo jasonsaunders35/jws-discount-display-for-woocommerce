@@ -146,6 +146,8 @@ var jwsVisualDiscount = {
         jwsVisualDiscount.adjustCornerPosition();
     }
 };
-if ('1' === jwsDLConfigArray.enabled) {
-	jwsVisualDiscount.render();
+if( 'undefined' !== typeof jwsDLConfigArray.enabled || null !== jwsDLConfigArray.enabled ){
+	if ('1' === jwsDLConfigArray.enabled) {
+		jwsVisualDiscount.render();
+	}
 }
