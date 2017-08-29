@@ -16,7 +16,6 @@ function add_footer_script() { ?>
                 var jwsDDConfigArray = <?php echo json_encode($config_array) ?>;
                 jwsDDConfigArray.currencySymbol = '<?php echo  html_entity_decode(get_woocommerce_currency_symbol()); ?>';
                 jwsDDConfigArray.offString = '<?php echo esc_html__('Off','jwsdiscountdisplay') ?>';
-
             </script>
 
             <script type="text/javascript" src = "<?php echo plugins_url( 'js/discount-display-setup.js', __FILE__ ); ?>?ver=4.8.1"></script>
