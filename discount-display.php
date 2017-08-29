@@ -2,7 +2,7 @@
 
 /**
 * Plugin Name: JWS Discount Display for WooCommerce
-* Description: Displays each discounted product's dollar or percent discount
+* Description: Displays each sale product's dollar or percent discount
 * Version: 1.0.0
 * Author: Jason William Saunders 
 * License: GPL2
