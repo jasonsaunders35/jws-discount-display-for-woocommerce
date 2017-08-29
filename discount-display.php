@@ -8,8 +8,6 @@
 * License: GPL2
 * Requires at least: 4.4
 * Tested up to: 4.8
-* 
-* Text Domain: jwsdiscountdisplay
 */
 
 
