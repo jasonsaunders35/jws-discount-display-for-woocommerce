@@ -10,11 +10,9 @@ function add_footer_script() { ?>
     <?php if ($config_array = get_option( 'discountdisplayoptions' )):?>
         <?php if ('1' === $config_array['enabled']):?>
             <script type="text/javascript">
-
                 <?php foreach ($config_array as $key => $value){
                     $config_array[$key] = esc_attr($value);
                 }?>
-
                 var jwsDDConfigArray = <?php echo json_encode($config_array) ?>;
                 jwsDDConfigArray.currencySymbol = '<?php echo  html_entity_decode(get_woocommerce_currency_symbol()); ?>';
                 jwsDDConfigArray.offString = '<?php echo esc_html__('Off','jwsdiscountdisplay') ?>';
